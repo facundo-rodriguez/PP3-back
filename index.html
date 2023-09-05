@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+   
+</head>
+<body>
+    
+    <h1>lista de usuarios</h1>
+
+
+    <table id="tabla">
+
+
+    </table>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+      
+    
+    <script>
+            
+            $(document).ready(function() {
+
+                tabla=document.getElementById('tabla');
+
+                $.ajax({
+                    url: "controlador/Cadmin.php?accion=listar_usuarios",
+                    type: "GET",
+                    data:{},
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response);
+
+                        //let i=0; i<response.length;i++
+                        
+                        for(i of response){
+
+                            tr=document.createElement("tr");
+
+                            td_id=document.createElement("td");
+                            td_usuario=document.createElement("td");
+                            td_estado=document.createElement("td");
+                            td_legajo=document.createElement("td");
+                            td_rol=document.createElement("td");
+                            
+                            td_id.textContent=i['Id_Usuario'];
+                            tr.appendChild(td_id);
+                           
+                            td_legajo.textContent=i['Legajo'];
+                            tr.appendChild(td_legajo);
+
+                            td_estado.textContent=i['estado'];
+                            tr.appendChild(td_estado);
+                            
+                            td_usuario.textContent=i['userName'];
+                            tr.appendChild(td_usuario);
+
+                            td_rol.textContent=i['Rol'];
+                            tr.appendChild(td_rol);
+                            
+                            tabla.appendChild(tr);
+
+                        }
+                    },
+                           
+                });
+            });
+                    
+    </script>
+
+</body>
+</html>
